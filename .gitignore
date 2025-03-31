@@ -1,0 +1,7 @@
+client_*.json
+.env
+.idea
+.vscode
+/venv
+*.pyc
+__pycache__/
