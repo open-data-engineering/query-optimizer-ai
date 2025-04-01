@@ -1,7 +1,5 @@
 import sqlparse
 import streamlit as st
-from app.suggestor.openai_engine import generate_suggestions_openai
-from app.suggestor.gemini_engine import generate_suggestions_gemini
 from app.components.suggestion_card import render_suggestion_card
 from app.components.table_schema import render_table_schemas
 from app.components.header import render_page_header

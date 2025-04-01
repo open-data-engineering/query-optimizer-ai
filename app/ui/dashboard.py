@@ -1,7 +1,7 @@
 import streamlit as st
-from app.ui.home import render_home
-from app.ui.analyzer_manual_query import render_manual_query_analyzer
-from app.ui.analyzer_historical_query import render_historical_query_analyzer
+from home import render_home
+from analyzer_manual_query import render_manual_query_analyzer
+from analyzer_historical_query import render_historical_query_analyzer
 
 st.set_page_config(page_title="Query Optimizer AI", layout="wide")
 
