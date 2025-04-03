@@ -5,3 +5,4 @@ client_*.json
 /venv
 *.pyc
 __pycache__/
+credential/

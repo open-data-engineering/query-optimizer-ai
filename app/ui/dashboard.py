@@ -1,9 +1,10 @@
 import streamlit as st
-from home import render_home
-from analyzer_manual_query import render_manual_query_analyzer
-from analyzer_historical_query import render_historical_query_analyzer
 
 st.set_page_config(page_title="Query Optimizer AI", layout="wide")
+
+from app.ui.home import render_home
+from app.ui.analyzer_manual_query import render_manual_query_analyzer
+from app.ui.analyzer_historical_query import render_historical_query_analyzer
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -22,15 +23,6 @@ else:
     st.sidebar.markdown(f"**{st.session_state.user_name}**")
 
     db_type = st.session_state.get("db_type", "❌ Não selecionado")
-    # db_icon = {
-    #     "BigQuery": "🔵",
-    #     "PostgreSQL": "🟢",
-    #     "Snowflake": "❄️",
-    #     "DuckDB": "🦆",
-    #     None: "⚠️",
-    # }.get(db_type, "💾")
-
-    # st.sidebar.markdown(f"{db_icon} Banco: `{db_type}`")
     st.sidebar.markdown(f"Banco: `{db_type}`")
 
     st.sidebar.markdown("---")
