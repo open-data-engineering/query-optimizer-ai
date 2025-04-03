@@ -5,3 +5,8 @@ google-generativeai
 pre-commit
 pytest-mock
 pytest
+google-cloud-bigquery
+google-auth
+sqlparse
+python-dotenv
+db-dtypes
