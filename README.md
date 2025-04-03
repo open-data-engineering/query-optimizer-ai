@@ -1,7 +1,7 @@
 # 🚀 Query Optimizer AI
 
 [![Deploy - Cloud Run](https://img.shields.io/badge/Cloud%20Run-Deployed-brightgreen?logo=googlecloud&style=flat-square)](https://query-optimizer-ai-517665453940.us-central1.run.app/)
-[![Docker Build](https://github.com/tiagornandrade/query-optimizer-ai/actions/workflows/docker-build.yml/badge.svg)](https://github.com/tiagornandrade/query-optimizer-ai/actions/workflows/docker-build.yml)
+![Docker Build Status](https://img.shields.io/badge/Docker-Build-blue)
 
 **Query Optimizer AI** é uma plataforma interativa que utiliza modelos de linguagem (LLMs) como OpenAI GPT-4 e Gemini para analisar, sugerir melhorias e estimar o custo de queries SQL — com suporte completo ao Google BigQuery.
 
