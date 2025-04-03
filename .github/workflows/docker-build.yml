@@ -2,23 +2,22 @@ name: Docker Build
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Configurar Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: Build da imagem Docker
-        run: docker build -t query-optimizer-ai .
+      - name: Build Docker image
+        run: docker build --platform=linux/amd64 -t query-optimizer-ai .
 
-      - name: Verificar execução
-        run: echo "✅ Build finalizado com sucesso!"
+      - name: Finish
+        run: echo "✅ Docker build completed!"
