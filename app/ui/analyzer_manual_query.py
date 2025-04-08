@@ -3,7 +3,6 @@ import streamlit as st
 from app.components.suggestion_card import render_suggestion_card
 from app.components.table_schema import render_table_schemas
 from app.components.header import render_page_header
-from app.components.model_selector import render_llm_selector
 from app.components.analyze_with_llm import analyze_query_with_llm
 
 from app.core.utils import (
@@ -22,8 +21,6 @@ def render_manual_query_analyzer():
         placeholder="Ex: SELECT * FROM sales ORDER BY date",
     )
 
-    llm_provider = render_llm_selector(key="llm_provider_manual")
-
     if st.button("🔍 Analisar com IA"):
         if not user_query.strip():
             st.warning("⚠️ Por favor, cole uma query válida.")
@@ -41,6 +38,8 @@ def render_manual_query_analyzer():
         query_cost, bytes_processed = estimate_query_cost(query)
         st.session_state.query_cost = float(query_cost)
         st.session_state.query_bytes = bytes_processed
+
+        llm_provider = "LLaMA"
 
         st.session_state.suggestions = analyze_query_with_llm(
             query, schemas, llm_provider
