@@ -4,7 +4,6 @@ from app.parser.performance_analyzer import flag_heavy_queries
 from app.core.utils import extract_table_names_from_query, get_table_schema
 from app.components.metrics_summary import render_metrics_summary
 from app.components.header import render_page_header
-from app.components.model_selector import render_llm_selector
 from app.components.table_schema import render_table_schemas
 from app.components.suggestion_card import render_suggestion_card
 from app.components.analyze_with_llm import analyze_query_with_llm
@@ -41,6 +40,10 @@ def __render_analysis_dashboard__(heavy_df):
 
     heavy_df_sorted = filtered_df.sort_values(by="cost_usd", ascending=False)
 
+    if heavy_df_sorted.empty:
+        st.warning("⚠️ Nenhuma query pesada encontrada para o período selecionado.")
+        return
+
     render_metrics_summary(
         {
             "total_queries": len(heavy_df_sorted),
@@ -69,32 +72,29 @@ def __render_query_analysis_block__(index, row):
     if show_key not in st.session_state:
         st.session_state[show_key] = False
 
-    llm_provider = render_llm_selector(key=f"llm_provider_{index}")
-
     if st.button(f"🔍 Analisar com IA para Query #{index}", key=f"llm_button_{index}"):
         st.session_state[show_key] = True
 
     if st.session_state[show_key]:
         with st.spinner("Consultando a IA..."):
             try:
-                __analyze_and_render_suggestions__(
-                    query, suggestion_key, llm_provider, query_cost
-                )
+                __analyze_and_render_suggestions__(query, suggestion_key, query_cost)
             except Exception as e:
                 st.error(f"❌ Erro ao consultar a IA: {e}")
 
     st.divider()
 
 
-def __analyze_and_render_suggestions__(query, suggestion_key, llm_provider, query_cost):
+def __analyze_and_render_suggestions__(query, suggestion_key, query_cost):
     table_names = extract_table_names_from_query(query)
     schemas = {t: get_table_schema(t) for t in table_names}
 
     render_table_schemas(schemas)
 
     if suggestion_key not in st.session_state:
-        suggestions = analyze_query_with_llm(query, schemas, llm_provider)
-        st.session_state[suggestion_key] = suggestions
+        st.session_state[suggestion_key] = analyze_query_with_llm(
+            query, schemas, "LLaMA"
+        )
 
     st.subheader("💡 Sugestões geradas pela IA:")
 
