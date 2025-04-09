@@ -8,6 +8,7 @@
 ## 🔗 Acesse a aplicação:
 👉 [query-optimizer-ai](https://query-optimizer-ai-517665453940.us-central1.run.app)
 
+
 ## 🎯 Funcionalidades
 
 - ✅ Análise manual de queries SQL com IA (OpenAI ou Gemini)
