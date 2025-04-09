@@ -6,7 +6,7 @@
 **Query Optimizer AI** é uma plataforma interativa que utiliza modelos de linguagem (LLMs) como OpenAI GPT-4 e Gemini para analisar, sugerir melhorias e estimar o custo de queries SQL — com suporte completo ao Google BigQuery.
 
 ## 🔗 Acesse a aplicação:
-👉 [query-optimizer-ai](query-optimizer-ai-517665453940.us-central1.run.app)
+👉 [query-optimizer-ai](https://query-optimizer-ai-517665453940.us-central1.run.app)
 
 ## 🎯 Funcionalidades
 
