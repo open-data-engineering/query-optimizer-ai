@@ -71,7 +71,7 @@ check-env:
 
 .PHONY: deploy-cloud-run
 deploy-cloud-run: check-env
-	@echo "🚀 Deploying to Cloud Run in yams-lab-nonprod"
+	@echo "🚀 Deploying query-optimizer-ai to Cloud Run in yams-lab-nonprod"
 	@IMAGE_URL=us-central1-docker.pkg.dev/yams-lab-nonprod/query-optimizer/query-optimizer-ai; \
 	gcloud run deploy query-optimizer-ai \
 		--image=$$IMAGE_URL \
