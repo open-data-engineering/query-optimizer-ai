@@ -58,15 +58,27 @@ docker-tag-push:
 	docker build --platform=linux/amd64 -t $$IMAGE_URL .; \
 	docker push $$IMAGE_URL
 
+.PHONY: check-env
+check-env:
+	@if [ -z "$(DD_API_KEY)" ]; then \
+		echo "❌ DD_API_KEY is not set. Please define it in your .env file."; \
+		exit 1; \
+	fi; \
+	if [ -z "$(DD_APP_KEY)" ]; then \
+		echo "❌ DD_APP_KEY is not set. Please define it in your .env file."; \
+		exit 1; \
+	fi
+
 .PHONY: deploy-cloud-run
-deploy-cloud-run:
-	@echo "🚀 Deploying query-optimizer-ai to Cloud Run in yams-lab-nonprod"
+deploy-cloud-run: check-env
+	@echo "🚀 Deploying to Cloud Run in yams-lab-nonprod"
 	@IMAGE_URL=us-central1-docker.pkg.dev/yams-lab-nonprod/query-optimizer/query-optimizer-ai; \
 	gcloud run deploy query-optimizer-ai \
 		--image=$$IMAGE_URL \
 		--region=us-central1 \
 		--platform=managed \
-		--allow-unauthenticated
+		--allow-unauthenticated \
+		--set-env-vars="DD_API_KEY=$(DD_API_KEY),DD_APP_KEY=$(DD_APP_KEY)"
 
 .PHONY: deploy
 deploy: docker-tag-push deploy-cloud-run
